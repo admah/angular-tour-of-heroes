@@ -16,13 +16,15 @@
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 // import './commands';
 
+import "@cypress/code-coverage/support";
+
 /**
  * @hack we have to import `zone.js/dist/zone-testing`.
  * This is due to implicit call to `resetFakeAsyncZone()`
  * in `@angular/core/testing`.
  * Cf. https://github.com/jscutlery/test-utils/issues/2
  */
- import 'zone.js/dist/zone';
- /* @hack fixes "Mocha has already been patched with Zone" error. */
- (globalThis as unknown)['Mocha']['__zone_patch__'] = false;
- import 'zone.js/dist/zone-testing';
+import "zone.js/dist/zone";
+/* @hack fixes "Mocha has already been patched with Zone" error. */
+(globalThis as unknown)["Mocha"]["__zone_patch__"] = false;
+import "zone.js/dist/zone-testing";

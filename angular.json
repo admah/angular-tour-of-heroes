@@ -16,13 +16,8 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/assets", "src/favicon.ico"],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,
@@ -62,6 +57,13 @@
             }
           }
         },
+        "serve-coverage": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "tour-of-heroes:build",
+            "extraWebpackConfig": "./cypress/coverage.webpack.js"
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -76,13 +78,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "src/styles.css"
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ]
+            "styles": ["src/styles.css"],
+            "assets": ["src/assets", "src/favicon.ico"]
           }
         },
         "lint": {
@@ -117,13 +114,27 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "tour-of-heroes:serve",
+            "devServerTarget": "tour-of-heroes:serve-coverage",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tour-of-heroes:serve:production"
+              "devServerTarget": "tour-of-heroes:serve-coverage:production"
+            }
+          }
+        },
+        "e2e-ci": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "tour-of-heroes:serve-coverage",
+            "watch": false,
+            "headless": true,
+            "browser": "chrome"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "tour-of-heroes:serve-coverage:production"
             }
           }
         }
@@ -150,9 +161,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "cypress/tsconfig.json"
-            ],
+            "tsConfig": ["cypress/tsconfig.json"],
             "exclude": []
           }
         },
