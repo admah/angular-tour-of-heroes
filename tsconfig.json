@@ -15,6 +15,6 @@
       "es2016",
       "dom"
     ],
-    "types": ["cypress", "node"]
+    "types": ["node"]
   }
 }
